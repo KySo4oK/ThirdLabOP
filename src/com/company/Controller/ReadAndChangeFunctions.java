@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Controller;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -33,6 +33,7 @@ public class ReadAndChangeFunctions {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
 
         printList(maze);
