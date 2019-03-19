@@ -12,6 +12,7 @@ public class ReadAndChangeFunctions {
     private static final String nameOfFile = "Maze.txt";
     private static List<String> maze = new ArrayList<>();
     private static List<String> graph = new ArrayList<>();
+    private static int[][] matrixOfGraph;
 
     public static void readAndFillList() {
         try (Reader reader = new FileReader(nameOfFile)) {
@@ -33,42 +34,60 @@ public class ReadAndChangeFunctions {
             e.printStackTrace();
         }
 
+
         printList(maze);
     }
 
     public static void fillGraph() {
+        matrixOfGraph = new int[maze.size()][maze.get(0).length()];
         String line;
         String graphLine;
         int size;
-        for (int i = 1; i < maze.size() - 1; i++) {
+        for (int i = 0; i < maze.size(); i++) {
             line = maze.get(i);
             graphLine = "";
             size = line.length();
             for (int j = 1; j <= size; j++) {
-                if (j == 1 || j == size - 1) {
-                    graphLine += " ";
+                if (i == 0 || i == maze.size() - 1) {
+                    matrixOfGraph[i][j - 1] = 0;
                 } else {
-                    switch (line.substring(j - 1, j)) {
-                        case "X":
-                            graphLine += " ";
-                            break;
-                        case " ":
-                            if (!line.substring(j - 2, j + 1).contains("X") ) {
-                                graphLine += "X";
-                            }
-                            else {
-                                graphLine+= " ";
-                            }
+                    if (j == 1 || j == size - 1) {
+                        graphLine += " ";
+                        matrixOfGraph[i][j -1] = 0;
+                    } else {
+                        switch (line.substring(j - 1, j)) {
+                            case "X":
+                                graphLine += " ";
+                                matrixOfGraph[i][j -1] = 0;
+                                break;
+                            case " ":
+                                if (!line.substring(j - 2, j + 1).contains("X")) {
+                                    graphLine += "X";
+                                    matrixOfGraph[i][j -1] = 1;
+                                } else {
+                                    graphLine += " ";
+                                    matrixOfGraph[i][j -1] = 0;
+                                }
 
+                        }
                     }
-                }
 
+                }
             }
             graph.add(graphLine);
         }
 
         printList(graph);
 
+    }
+
+    private static void  printMatrix(){
+        for (int i = 0; i < matrixOfGraph.length ; i++) {
+            for (int j = 0; j < matrixOfGraph[i].length ; j++) {
+                System.out.print(matrixOfGraph[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     private static void printList(List<String> list) {
