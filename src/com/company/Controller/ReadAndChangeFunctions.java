@@ -67,7 +67,7 @@ public class ReadAndChangeFunctions {
                                     matrixOfGraph[i][j -1] = 1;
                                 } else {
                                     graphLine += " ";
-                                   // matrixOfGraph[i][j -1] = 0;
+                                    matrixOfGraph[i][j -1] = 0;
                                 }
 
                         }
