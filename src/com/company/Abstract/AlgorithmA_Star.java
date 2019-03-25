@@ -23,10 +23,12 @@ public class AlgorithmA_Star {
         this.allCells = cells;
     }
 
-    public void seach() {
+    public void search() {
         MyQueerWithPriority borderQueer;
         Cell current = start;
+        Cell next;
         int previousD;
+        int currentD;
         while (current != last) {
             previousD = calculateD(current);
             borderQueer = new MyQueerWithPriority();
@@ -37,14 +39,26 @@ public class AlgorithmA_Star {
                 else {
                 borderQueer.push(border[i], calculateD(border[i]));}
             }
+            next = (Cell) borderQueer.pop().getItem();
+            currentD = calculateD(next);
+            if(currentD < previousD && isVisited(next) == false){
+                alreadyVisited.add(next);
+                numberOfSteps++;
+                current = next;
+            }
+            else {
+                if(currentD > previousD){
+                    alreadyVisited.add(next);
 
+                }
 
-
+            }
 
 
 
         }
     }
+
 
     public void fillBorder(int x, int y){
         boolean isPath;
@@ -61,6 +75,18 @@ public class AlgorithmA_Star {
 
     private int calculateD(Cell current) {
         return numberOfSteps + functionToCalculateFromCurrentToLast(current) ;
+    }
+
+    private boolean isVisited(Cell current){
+        boolean mark = false;
+        for (int i = 0; i < alreadyVisited.size() ; i++) {
+            if(alreadyVisited.get(i) == current){
+                mark = true;
+                break;
+            }
+        }
+        return mark;
+
     }
 
 

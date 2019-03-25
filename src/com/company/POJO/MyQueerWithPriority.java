@@ -24,7 +24,7 @@ public class MyQueerWithPriority {
             Node previous = null;
             Node newElement;
             while (mark == false) {
-                if (current.getPriority() < priority) {
+                if (current.getPriority() > priority) {
                     newElement = new Node(element, priority, current);
                     if (previous != null) {
                         previous.setNext(newElement);
@@ -33,7 +33,7 @@ public class MyQueerWithPriority {
                     }
                     mark = true;
                 } else {
-                    if (current.getPriority() > priority) {
+                    if (current.getPriority() < priority) {
                         if (current.getNext() == null) {
                             newElement = new Node(element, priority, null);
                             current.setNext(newElement);
