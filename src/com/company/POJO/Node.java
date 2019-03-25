@@ -1,37 +1,37 @@
 package com.company.POJO;
 
 public class Node<T> {
-    private Node<T> previous;
-    private Node<T> next;
-    private T item;
+    Node<T> next;
+    T element;
+    int priority;
 
-    public Node(Node previous, Node next, T item) {
-        this.previous = previous;
+    public Node(Node<T> next, T element, int priority) {
         this.next = next;
-        this.item = item;
+        this.element = element;
+        this.priority = priority;
     }
 
-    public Node getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(Node previous) {
-        this.previous = previous;
-    }
-
-    public Node getNext() {
+    public Node<T> getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Node<T> next) {
         this.next = next;
     }
 
-    public T getItem() {
-        return item;
+    public T getElement() {
+        return element;
     }
 
-    public void setItem(T item) {
-        this.item = item;
+    public void setElement(T element) {
+        this.element = element;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }
