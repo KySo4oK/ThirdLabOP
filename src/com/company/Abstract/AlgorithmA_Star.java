@@ -28,7 +28,7 @@ public class AlgorithmA_Star {
     public void search() {
         MyQueerWithPriority borderQueer;
         Cell current = start;
-        Cell next;
+        Cell next = null;
         int previousD;
         int currentD;
         while (current != last) {
@@ -41,7 +41,9 @@ public class AlgorithmA_Star {
                 else {
                     borderQueer.push(border[i], calculateD(border[i]));}
             }
+            Cell temp = next;
             next = (Cell) borderQueer.pop().getItem();
+            next.par = temp;
 
             currentD = calculateD(next);
             if(currentD < previousD && isVisited(next) == false){
