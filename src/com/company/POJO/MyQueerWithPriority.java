@@ -1,6 +1,7 @@
 package com.company.POJO;
 
-public class MyQueerWithPriority {
+
+public class MyQueerWithPriority<T> {
     private Node last;
 
 
@@ -14,9 +15,9 @@ public class MyQueerWithPriority {
         this.last = null;
     }
 
-    public void push(Object element, int priority) {
+    public void push(T element, int priority) {
         if (last == null) {
-            last = new Node(null, element, 0);
+            last = new Node(element, priority, null);
         } else {
             boolean mark = false;
             Node current = last;
@@ -24,7 +25,7 @@ public class MyQueerWithPriority {
             Node newElement;
             while (mark == false) {
                 if (current.getPriority() < priority) {
-                    newElement = new Node(current, element, priority);
+                    newElement = new Node(element, priority, current);
                     if (previous != null) {
                         previous.setNext(newElement);
                     } else {
@@ -34,7 +35,7 @@ public class MyQueerWithPriority {
                 } else {
                     if (current.getPriority() > priority) {
                         if (current.getNext() == null) {
-                            newElement = new Node( current,element ,priority);
+                            newElement = new Node(element, priority, null);
                             current.setNext(newElement);
                             mark = true;
                         }
@@ -67,9 +68,24 @@ public class MyQueerWithPriority {
         System.out.println("Your queer: ");
         for (int i = 0; i < size; i++) {
             if (i != size - 1) {
-                System.out.print(current.getElement() + ", ");
+                System.out.print(current.getItem() + ", ");
             } else {
-                System.out.print(current.getElement() + "; ");
+                System.out.print(current.getItem() + "; ");
+            }
+            current = current.getNext();
+
+        }
+        System.out.println();
+    }
+
+    public void printWithPriority() {
+        Node current = last;
+        System.out.println("Your queer (element, priority): ");
+        for (int i = 0; i < size; i++) {
+            if (i != size - 1) {
+                System.out.print("(" + current.getItem() + ", " + current.getPriority() + "); ");
+            } else {
+                System.out.print("(" + current.getItem() + ", " + current.getPriority() + "). ");
             }
             current = current.getNext();
 
@@ -83,6 +99,4 @@ public class MyQueerWithPriority {
         size--;
         return result;
     }
-
-
 }

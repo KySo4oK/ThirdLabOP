@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.Controller.ReadAndChangeFunctions;
+import com.company.POJO.MyQueerWithPriority;
 
 public class Main {
 
@@ -8,6 +9,7 @@ public class Main {
         ReadAndChangeFunctions.readAndFillList();
 
         ReadAndChangeFunctions.fillGraph();
+        MyQueerWithPriority queerWithPriority = new MyQueerWithPriority();
 
 
 
