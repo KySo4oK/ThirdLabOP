@@ -15,8 +15,7 @@ public class Main {
         ReadAndChangeFunctions.fillGraph();
         AlgorithmA_Star aStar = new AlgorithmA_Star(1, 12, 2, 2, ReadAndChangeFunctions.matrixOfGraph);
         List<Cell> path = aStar.search();
-        ReadAndChangeFunctions.printCellList(path);
-        System.out.println("Result");
+        System.out.println("Result: ");
         ReadAndChangeFunctions.fillPath(path);
 
 

@@ -81,9 +81,8 @@ public class ReadAndChangeFunctions {
             }
             graph.add(graphLine);
         }
-
+        System.out.println("Your graph: ");
         printList(graph);
-        printMatrix();
 
     }
 
@@ -129,6 +128,7 @@ public class ReadAndChangeFunctions {
                     case " ":
                         if (line[k - 1] != "X" && line[k + 1] != "X") {
                             if (findByCor(i, k, path) == true) {
+                                newLine += findNameOfCellByCor(i, k, path);
 
                             }
                             else {
@@ -147,6 +147,21 @@ public class ReadAndChangeFunctions {
         printList(newMaze);
 
 
+    }
+
+    private static String findNameOfCellByCor(int x, int y, List<Cell> path){
+        String result = " ";
+        Cell current;
+        for (int i = 0; i < path.size(); i++) {
+            current = path.get(i);
+            if (current.getIdY() == y && current.getIdX() == x) {
+                result = current.getName();
+                break;
+            }
+
+        }
+
+        return result;
     }
 
     private static boolean findByCor(int x, int y, List<Cell> path) {
