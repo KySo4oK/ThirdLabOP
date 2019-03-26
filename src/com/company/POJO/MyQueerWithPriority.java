@@ -1,7 +1,7 @@
 package com.company.POJO;
 
 
-public class MyQueerWithPriority {
+public class MyQueerWithPriority<T> {
     private Node last;
 
 
@@ -15,7 +15,7 @@ public class MyQueerWithPriority {
         this.last = null;
     }
 
-    public void push(Object element, int priority) {
+    public void push(T element, int priority) {
         if (last == null) {
             last = new Node(element, priority, null);
         } else {
@@ -24,7 +24,7 @@ public class MyQueerWithPriority {
             Node previous = null;
             Node newElement;
             while (mark == false) {
-                if (current.getPriority() > priority) {
+                if (current.getPriority() < priority) {
                     newElement = new Node(element, priority, current);
                     if (previous != null) {
                         previous.setNext(newElement);
@@ -33,7 +33,7 @@ public class MyQueerWithPriority {
                     }
                     mark = true;
                 } else {
-                    if (current.getPriority() < priority) {
+                    if (current.getPriority() > priority) {
                         if (current.getNext() == null) {
                             newElement = new Node(element, priority, null);
                             current.setNext(newElement);
