@@ -79,6 +79,11 @@ public class ReadAndChangeFunctions {
         }
 
         printList(graph);
+<<<<<<< Updated upstream:src/com/company/Controller/ReadAndChangeFunctions.java
+=======
+        printMatrix();
+
+>>>>>>> Stashed changes:src/com/company/Controller/ReadAndChangeFunctions.java
         printMatrix();
 
     }
