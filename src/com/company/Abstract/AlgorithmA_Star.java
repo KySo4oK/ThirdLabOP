@@ -3,6 +3,7 @@ package com.company.Abstract;
 import com.company.POJO.Cell;
 import com.company.POJO.MyQueerWithPriority;
 import com.company.POJO.Node;
+import com.company.Controller.ReadAndChangeFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class AlgorithmA_Star {
     private List<Cell> alreadyVisited = new ArrayList<>();
     private int[][] allCells;
     private MyQueerWithPriority queer = new MyQueerWithPriority();
+    private List<Cell> pathOfCell = new ArrayList<>();
 
     public AlgorithmA_Star(Cell last, Cell start, int[][] cells) {
         this.last = last;
@@ -30,16 +32,17 @@ public class AlgorithmA_Star {
         int previousD;
         int currentD;
         while (current != last) {
-            previousD = calculateD(current);
+                       previousD = calculateD(current);
             borderQueer = new MyQueerWithPriority();
             for (int i = 0; i < border.length; i++) {
                 if(border[i].isPath() == false){
                     continue;
                 }
                 else {
-                borderQueer.push(border[i], calculateD(border[i]));}
+                    borderQueer.push(border[i], calculateD(border[i]));}
             }
             next = (Cell) borderQueer.pop().getItem();
+
             currentD = calculateD(next);
             if(currentD < previousD && isVisited(next) == false){
                 alreadyVisited.add(next);
@@ -49,7 +52,6 @@ public class AlgorithmA_Star {
             else {
                 if(currentD > previousD){
                     alreadyVisited.add(next);
-
                 }
 
             }
@@ -57,6 +59,29 @@ public class AlgorithmA_Star {
 
 
         }
+        buildPath(start, last);
+        ReadAndChangeFunctions.printMatrix();
+    }
+
+    public void buildPath(Cell start, Cell last){
+        Cell temp = last;
+        while (temp!=start){
+            pathOfCell.add(temp);
+            temp = temp.par;
+        }
+        pathOfCell.add(start);
+        int size = pathOfCell.size();
+        int startFillInt = size;
+        temp = last;
+        while (temp!= start.par){
+                setValueOfCell(startFillInt, temp);
+                temp = temp.par;
+                startFillInt--;
+        }
+    }
+
+    void setValueOfCell(int a, Cell temp) {
+        ReadAndChangeFunctions.matrixOfGraph[temp.getIdX()][temp.getIdY()] = a;
     }
 
 

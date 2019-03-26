@@ -4,6 +4,7 @@ public class Cell {
     private int idX;
     private int idY;
     private boolean isPath;
+    public Cell par;
 
     public void setD(int d) {
         this.d = d;

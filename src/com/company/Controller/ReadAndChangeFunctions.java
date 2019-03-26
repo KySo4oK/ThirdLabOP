@@ -12,7 +12,7 @@ public class ReadAndChangeFunctions {
     private static final String nameOfFile = "Maze.txt";
     private static List<String> maze = new ArrayList<>();
     private static List<String> graph = new ArrayList<>();
-    private static int[][] matrixOfGraph;
+    public static int[][] matrixOfGraph;
 
     public static void readAndFillList() {
         try (Reader reader = new FileReader(nameOfFile)) {
@@ -83,7 +83,7 @@ public class ReadAndChangeFunctions {
 
     }
 
-    private static void  printMatrix(){
+    public static void  printMatrix(){
         for (int i = 0; i < matrixOfGraph.length ; i++) {
             for (int j = 0; j < matrixOfGraph[i].length ; j++) {
                 System.out.print(matrixOfGraph[i][j] + " ");
