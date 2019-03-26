@@ -23,7 +23,7 @@ public class AlgorithmA_Star {
         last.setWeight(0);
         this.start = new Cell(xStart, yStart);
         start.setWeight(calculateD(start));
-        fillQueueOfAllCells(cells);
+        fillQueueOfAllCells(cells); // fill our queue with priority with cell of our graph
 
     }
 
@@ -34,12 +34,12 @@ public class AlgorithmA_Star {
         MyQueerWithPriority<Cell> neighbors;
 
         while (willBeVisited.getSize() != 0) {
-            current = getMinWeight(willBeVisited);
-            if (current.getIdX() == last.getIdX() && current.getIdY() == last.getIdY()) {
-                buildPath(start, current);
+            current = getMinWeight(willBeVisited); // find the best direction from queue of available
+            if (current.getIdX() == last.getIdX() && current.getIdY() == last.getIdY()) { // we found our path
+                buildPath(start, current);// function that build your path
                 return pathOfCell;
             } else {
-                willBeVisited.remove(current, current.getWeight());
+                willBeVisited.remove(current, current.getWeight()); // deletes current node from "has`t visited " list
                 alreadyVisited.add(current);
                 neighbors = findNeighbors(current);
                 boolean markForBetterPath;
@@ -47,11 +47,11 @@ public class AlgorithmA_Star {
                 int size = neighbors.getSize();
                 for (int i = 0; i < size; i++) {
                     myNeighbor = (Cell) neighbors.pop().getItem();
-                    if (isThere(myNeighbor, alreadyVisited) == true) {
+                    if (isThere(myNeighbor, alreadyVisited) == true) { // if we have already be in this node before we pass it
                         continue;
                     } else {
                         if (isAdded(willBeVisited, myNeighbor) == false) {
-                            willBeVisited.push(myNeighbor, myNeighbor.getWeight());
+                            willBeVisited.push(myNeighbor, myNeighbor.getWeight()); // we have never had access to this node
                             markForBetterPath = true;
                         } else {
                             if (calculateD(myNeighbor) > current.getWeight()) {
@@ -65,34 +65,22 @@ public class AlgorithmA_Star {
                         if (markForBetterPath == true) {
                             myNeighbor.setParent(current);
                             myNeighbor.setWeight(calculateD(myNeighbor));
-                            //numberOfSteps++;
+
                         }
                     }
 
 
                 }
             }
-//            pathOfCell.clear();
-//            buildPath(start, current);
-//            printList(pathOfCell);
+
 
         }
 
         return pathOfCell;
-
-    }
-
-    public static void printList(List<Cell> list) {
-        Cell element;
-        for (int i = 0; i < list.size(); i++) {
-            element = list.get(i);
-            System.out.print("( " + element.getIdX() + ", " + element.getIdY() + ")");
-        }
-        System.out.println();
     }
 
 
-    public MyQueerWithPriority findNeighbors(Cell current) {
+    public MyQueerWithPriority findNeighbors(Cell current) { // method that finds neighbors of current node
         MyQueerWithPriority<Cell> newAllCells = new MyQueerWithPriority<>();
         MyQueerWithPriority<Cell> border = new MyQueerWithPriority();
         int size = allCells.getSize();
@@ -113,23 +101,20 @@ public class AlgorithmA_Star {
     }
 
 
-    private int calculateD(Cell current) {
+    private int calculateD(Cell current) { // method that calculate distance(weight for current node)
         return numberOfSteps + functionToCalculateFromCurrentToLast(current);
     }
 
-    private boolean isThere(Cell current, List<Cell> list) {
+    private boolean isThere(Cell current, List<Cell> list) { // method that checks if we have been in this node before
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getIdX() == current.getIdX() && list.get(i).getIdY() == current.getIdY()) {
                 return true;
             }
-
         }
         return false;
-
-
     }
 
-    public void buildPath(Cell start, Cell last) {
+    public void buildPath(Cell start, Cell last) {// method that builds pass from end
         Cell temp = last;
         while (temp != start) {
             pathOfCell.add(temp);
@@ -146,7 +131,8 @@ public class AlgorithmA_Star {
         }
     }
 
-    private boolean isAdded(MyQueerWithPriority<Cell> queue, Cell element) {
+    private boolean isAdded(MyQueerWithPriority<Cell> queue, Cell element) {// method that checks if we have had access
+        // to  this node before
         MyQueerWithPriority<Cell> newQ = new MyQueerWithPriority<>();
         int size = queue.getSize();
         Cell current;

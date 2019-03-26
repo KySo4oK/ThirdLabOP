@@ -5,6 +5,7 @@ public class Cell {
     private int idY;
     private Cell parent;
     private int weight;
+    private String name;
 
     public void setIdX(int idX) {
         this.idX = idX;
@@ -20,6 +21,14 @@ public class Cell {
 
     public void setParent(Cell parent) {
         this.parent = parent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getWeight() {
