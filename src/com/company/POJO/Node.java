@@ -1,21 +1,21 @@
 package com.company.POJO;
 
-public class Node {
-    private Object item;
+public class Node<T> {
+    private T item;
     private int priority;
     private Node next;
 
-    public Node(Object item, int priority, Node next) {
+    public Node(T item, int priority, Node next) {
         this.item = item;
         this.priority = priority;
         this.next = next;
     }
 
-    public Object getItem() {
+    public T getItem() {
         return item;
     }
 
-    public void setItem(Object item) {
+    public void setItem(T item) {
         this.item = item;
     }
 

@@ -2,7 +2,7 @@ package com.company.POJO;
 
 
 public class MyQueerWithPriority<T> {
-    private Node last;
+    private Node<T> last;
 
 
     private int size = 0;
@@ -13,6 +13,34 @@ public class MyQueerWithPriority<T> {
 
     public MyQueerWithPriority() {
         this.last = null;
+    }
+
+    public void remove(T element, int priority) {
+        if(element == last.getItem() && priority == last.getPriority()){
+            pop();
+        }
+        else {
+            Node current = last;
+            Node next = last.getNext();
+            Node newNext;
+            while (next != null){
+                if(element == next.getItem() && priority == next.getPriority()){
+                   if (next.getNext() == null){
+                       current.setNext(null);
+                   }
+                   else {
+                       newNext = next.getNext();
+                       current.setNext(newNext);
+
+                   }
+                   break;
+                }
+                current = next;
+                next = next.getNext();
+            }
+            size--;
+        }
+
     }
 
     public void push(T element, int priority) {
@@ -33,7 +61,7 @@ public class MyQueerWithPriority<T> {
                     }
                     mark = true;
                 } else {
-                    if (current.getPriority() > priority) {
+                    if (current.getPriority() >= priority) {
                         if (current.getNext() == null) {
                             newElement = new Node(element, priority, null);
                             current.setNext(newElement);
@@ -48,6 +76,8 @@ public class MyQueerWithPriority<T> {
         }
         size++;
     }
+
+
 
     public boolean isEmpty() {
         if (size == 0) {
