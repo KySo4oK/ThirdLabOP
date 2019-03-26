@@ -35,7 +35,7 @@ public class AlgorithmA_Star {
 
         while (willBeVisited.getSize() != 0) {
             current = getMinWeight(willBeVisited);
-            if (current == last) {
+            if (current.getIdX() == last.getIdX() && current.getIdY() == last.getIdY()) {
                 buildPath(start, current);
                 return pathOfCell;
             } else {
@@ -65,16 +65,16 @@ public class AlgorithmA_Star {
                         if (markForBetterPath == true) {
                             myNeighbor.setParent(current);
                             myNeighbor.setWeight(calculateD(myNeighbor));
-                            numberOfSteps++;
+                            //numberOfSteps++;
                         }
                     }
 
 
                 }
             }
-            pathOfCell.clear();
-            buildPath(start, current);
-            printList(pathOfCell);
+//            pathOfCell.clear();
+//            buildPath(start, current);
+//            printList(pathOfCell);
 
         }
 
@@ -101,7 +101,7 @@ public class AlgorithmA_Star {
         for (int i = 0; i < size; i++) {
             element = (Cell) allCells.pop().getItem();
             if ((Math.abs(element.getIdX() - current.getIdX()) == 1 && element.getIdY() == current.getIdY()) ||
-                    (Math.abs(element.getIdY() - current.getIdY()) == 1 && element.getIdX() == current.getIdY())) {
+                    (Math.abs(element.getIdY() - current.getIdY()) == 1 && element.getIdX() == current.getIdX())) {
                 border.push(element, element.getWeight());
             }
             newAllCells.push(element, element.getWeight());
