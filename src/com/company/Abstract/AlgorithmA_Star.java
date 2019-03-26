@@ -44,36 +44,51 @@ public class AlgorithmA_Star {
                 neighbors = findNeighbors(current);
                 boolean markForBetterPath;
                 Cell myNeighbor;
-                for (int i = 0; i < neighbors.getSize(); i++) {
+                int size = neighbors.getSize();
+                for (int i = 0; i < size; i++) {
                     myNeighbor = (Cell) neighbors.pop().getItem();
                     if (isThere(myNeighbor, alreadyVisited) == true) {
                         continue;
-                    }
-                    if (isAdded(willBeVisited, myNeighbor) == false) {
-                        willBeVisited.push(myNeighbor, myNeighbor.getWeight());
-                        markForBetterPath = true;
                     } else {
-                        if (calculateD(myNeighbor) > current.getWeight()) {
+                        if (isAdded(willBeVisited, myNeighbor) == false) {
+                            willBeVisited.push(myNeighbor, myNeighbor.getWeight());
                             markForBetterPath = true;
                         } else {
-                            markForBetterPath = false;
+                            if (calculateD(myNeighbor) > current.getWeight()) {
+                                markForBetterPath = true;
+                            } else {
+                                markForBetterPath = false;
+                            }
+
                         }
 
-                    }
-
-                    if (markForBetterPath == true) {
-                        myNeighbor.setParent(current);
-                        myNeighbor.setWeight(calculateD(myNeighbor));
-                        numberOfSteps++;
+                        if (markForBetterPath == true) {
+                            myNeighbor.setParent(current);
+                            myNeighbor.setWeight(calculateD(myNeighbor));
+                            numberOfSteps++;
+                        }
                     }
 
 
                 }
             }
+            pathOfCell.clear();
+            buildPath(start, current);
+            printList(pathOfCell);
+
         }
 
         return pathOfCell;
 
+    }
+
+    public static void printList(List<Cell> list) {
+        Cell element;
+        for (int i = 0; i < list.size(); i++) {
+            element = list.get(i);
+            System.out.print("( " + element.getIdX() + ", " + element.getIdY() + ")");
+        }
+        System.out.println();
     }
 
 
@@ -104,7 +119,7 @@ public class AlgorithmA_Star {
 
     private boolean isThere(Cell current, List<Cell> list) {
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == current) {
+            if (list.get(i).getIdX() == current.getIdX() && list.get(i).getIdY() == current.getIdY()) {
                 return true;
             }
 
@@ -144,7 +159,12 @@ public class AlgorithmA_Star {
             newQ.push(current, current.getWeight());
 
         }
-        queue = newQ;
+
+        Cell newCurrent;
+        for (int i = 0; i < size; i++) {
+            newCurrent = (Cell) newQ.pop().getItem();
+            queue.push(newCurrent, newCurrent.getWeight());
+        }
         return mark;
     }
 

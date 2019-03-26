@@ -13,7 +13,7 @@ public class Main {
 
         ReadAndChangeFunctions.fillGraph();
         AlgorithmA_Star aStar = new AlgorithmA_Star(1, 12, 2, 2, ReadAndChangeFunctions.matrixOfGraph);
-       printList(aStar.search());
+        printList(aStar.search());
 
 
     }
