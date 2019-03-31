@@ -5,7 +5,7 @@ public class Cell {
     private int idY;
     private Cell parent;
     private int weight;
-    private String name;
+    private String name = " ";
 
     public void setIdX(int idX) {
         this.idX = idX;

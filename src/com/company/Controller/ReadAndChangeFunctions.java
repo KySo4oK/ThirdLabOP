@@ -95,11 +95,16 @@ public class ReadAndChangeFunctions {
         }
     }
 
-    public static List<Cell> namedPath(List<Cell> path){
+    public static List<Cell> namedPath(List<Cell> path) {
+        List<Cell> newNamedPath = new ArrayList<>();
+        for (int i = 0; i < path.size(); i++) {
+            newNamedPath.add(path.get(path.size() - i - 1));
+
+        }
         Cell current;
         int j = 0;
-        for (int i = 0; i < path.size() ; i++) {
-            current = path.get(i);
+        for (int i = 0; i < path.size(); i++) {
+            current = newNamedPath.get(i);
             if (j < 10) {
                 current.setName(Integer.toString(j));
             } else {
@@ -130,9 +135,8 @@ public class ReadAndChangeFunctions {
                             if (findByCor(i, k, path) == true) {
                                 newLine += findNameOfCellByCor(i, k, path);
 
-                            }
-                            else {
-                                newLine+= " ";
+                            } else {
+                                newLine += " ";
                             }
                         } else {
                             newLine += " ";
@@ -149,7 +153,7 @@ public class ReadAndChangeFunctions {
 
     }
 
-    private static String findNameOfCellByCor(int x, int y, List<Cell> path){
+    private static String findNameOfCellByCor(int x, int y, List<Cell> path) {
         String result = " ";
         Cell current;
         for (int i = 0; i < path.size(); i++) {
