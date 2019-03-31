@@ -1,13 +1,8 @@
 package com.company.POJO;
 
 
-<<<<<<< Updated upstream
-public class MyQueerWithPriority {
-    private Node last;
-=======
 public class MyQueerWithPriority<T> {
     private Node<T> last;
->>>>>>> Stashed changes
 
 
     private int size = 0;
@@ -20,9 +15,6 @@ public class MyQueerWithPriority<T> {
         this.last = null;
     }
 
-<<<<<<< Updated upstream
-    public void push(Object element, int priority) {
-=======
     public void remove(T element, int priority) {
         if(element == last.getItem() && priority == last.getPriority()){
             pop();
@@ -33,15 +25,15 @@ public class MyQueerWithPriority<T> {
             Node newNext;
             while (next != null){
                 if(element == next.getItem() && priority == next.getPriority()){
-                   if (next.getNext() == null){
-                       current.setNext(null);
-                   }
-                   else {
-                       newNext = next.getNext();
-                       current.setNext(newNext);
+                    if (next.getNext() == null){
+                        current.setNext(null);
+                    }
+                    else {
+                        newNext = next.getNext();
+                        current.setNext(newNext);
 
-                   }
-                   break;
+                    }
+                    break;
                 }
                 current = next;
                 next = next.getNext();
@@ -52,7 +44,6 @@ public class MyQueerWithPriority<T> {
     }
 
     public void push(T element, int priority) {
->>>>>>> Stashed changes
         if (last == null) {
             last = new Node(element, priority, null);
         } else {
@@ -61,11 +52,7 @@ public class MyQueerWithPriority<T> {
             Node previous = null;
             Node newElement;
             while (mark == false) {
-<<<<<<< Updated upstream
-                if (current.getPriority() > priority) {
-=======
                 if (current.getPriority() < priority) {
->>>>>>> Stashed changes
                     newElement = new Node(element, priority, current);
                     if (previous != null) {
                         previous.setNext(newElement);
@@ -74,11 +61,7 @@ public class MyQueerWithPriority<T> {
                     }
                     mark = true;
                 } else {
-<<<<<<< Updated upstream
-                    if (current.getPriority() < priority) {
-=======
                     if (current.getPriority() >= priority) {
->>>>>>> Stashed changes
                         if (current.getNext() == null) {
                             newElement = new Node(element, priority, null);
                             current.setNext(newElement);
@@ -94,11 +77,8 @@ public class MyQueerWithPriority<T> {
         size++;
     }
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
     public boolean isEmpty() {
         if (size == 0) {
             return true;
