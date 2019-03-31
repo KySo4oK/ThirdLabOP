@@ -103,7 +103,7 @@ public class ReadAndChangeFunctions {
         }
         Cell current;
         int j = 0;
-        for (int i = 0; i < path.size(); i++) {
+        for (int i = 0; i < path.size(); i+=5) {
             current = newNamedPath.get(i);
             if (j < 10) {
                 current.setName(Integer.toString(j));
